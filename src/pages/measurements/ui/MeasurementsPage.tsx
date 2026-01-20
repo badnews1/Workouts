@@ -10,13 +10,12 @@ import { Header } from '@/shared';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Empty, EmptyIcon, EmptyTitle } from '@/components/ui/empty';
-import { MeasurementForm } from '@/widgets/measurement-form';
+import { AddMeasurementForm, useMeasurementForm } from '@/features/add-measurement';
 import { MeasurementHistory } from '@/widgets/measurement-history';
 import { WeightGoalProgress } from '@/widgets/weight-goal-progress';
 import { CurrentMeasurements } from '@/widgets/current-measurements';
-import { useMeasurements } from '@/entities/measurement';
+import { useMeasurements, getMeasurementColor, calculateWeightProgress } from '@/entities/measurement';
 import { useUserGoal } from '@/entities/user-goal';
-import { useMeasurementForm, calculateWeightProgress, getMeasurementColor } from '../model';
 
 export function MeasurementsPage() {
   const { measurements, deleteMeasurement, addMeasurement, updateMeasurement } = useMeasurements();
@@ -91,7 +90,7 @@ export function MeasurementsPage() {
 
         {/* Форма добавления/редактирования замера */}
         {isAdding && (
-          <MeasurementForm
+          <AddMeasurementForm
             formData={formData}
             onUpdateField={updateField}
             onSave={handleSave}

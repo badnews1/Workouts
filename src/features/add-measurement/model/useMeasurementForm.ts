@@ -7,20 +7,8 @@
 import { useState } from 'react';
 import { toast } from 'sonner@2.0.3';
 import { parseNumericFields, getTodayDateKey } from '@/shared/lib/utils';
-import { useMeasurements, type Measurement } from '@/entities/measurement';
-
-interface MeasurementFormData {
-  date: string;
-  weight: string;
-  biceps: string;
-  forearm: string;
-  shoulders: string;
-  chest: string;
-  waist: string;
-  glutes: string;
-  hips: string;
-  calves: string;
-}
+import type { Measurement } from '@/entities/measurement';
+import type { MeasurementFormData } from './types';
 
 const INITIAL_FORM_DATA: MeasurementFormData = {
   date: getTodayDateKey(), // Текущая дата в формате YYYY-MM-DD

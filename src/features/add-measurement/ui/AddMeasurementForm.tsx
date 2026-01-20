@@ -1,30 +1,17 @@
 /**
- * MeasurementForm - Виджет формы добавления/редактирования замера
+ * AddMeasurementForm - Форма добавления/редактирования замера
  * 
  * Форма для ввода всех параметров тела
  */
 
-import { MEASUREMENT_FIELDS } from '@/entities/measurement/config/measurement-fields';
-import type { Measurement } from '@/entities/measurement';
+import { MEASUREMENT_FIELDS } from '@/entities/measurement';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import type { MeasurementFormData } from '../model/types';
 import { InputField } from './InputField';
 import { DateField } from './DateField';
 
-interface MeasurementFormData {
-  date: string;
-  weight: string;
-  biceps: string;
-  forearm: string;
-  shoulders: string;
-  chest: string;
-  waist: string;
-  glutes: string;
-  hips: string;
-  calves: string;
-}
-
-interface MeasurementFormProps {
+interface AddMeasurementFormProps {
   formData: MeasurementFormData;
   onUpdateField: (field: keyof MeasurementFormData, value: string) => void;
   onSave: () => void;
@@ -32,13 +19,13 @@ interface MeasurementFormProps {
   isEditing?: boolean;
 }
 
-export function MeasurementForm({
+export function AddMeasurementForm({
   formData,
   onUpdateField,
   onSave,
   onCancel,
   isEditing = false,
-}: MeasurementFormProps) {
+}: AddMeasurementFormProps) {
   return (
     <Card className="mb-6">
       <CardHeader variant="yellow">

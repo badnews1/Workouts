@@ -6,7 +6,7 @@
 
 import type { LucideIcon } from 'lucide-react';
 import { Card } from '@/components/ui/card';
-import { IconBox } from './icon-box';
+import { IconBox } from '../icon-box';
 
 interface SettingsButtonProps {
   icon: LucideIcon;

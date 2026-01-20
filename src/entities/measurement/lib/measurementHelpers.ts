@@ -1,11 +1,17 @@
 /**
+ * Вспомогательные функции для работы с замерами
+ */
+
+import type { Goal } from '@/shared/model';
+
+/**
  * Определяет цвет фона для замера на основе изменения и цели
  */
 export function getMeasurementColor(
   current: number | undefined,
   previous: number | undefined,
   param: string,
-  goal: 'weight_loss' | 'muscle_gain' | 'maintain'
+  goal: Goal
 ): { bg: string; textColor: string } {
   // Если нет текущего замера - белый
   if (current === undefined) {

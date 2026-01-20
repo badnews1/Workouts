@@ -5,7 +5,7 @@
  */
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { formatDateRelative } from '../lib';
+import { formatDateRelative } from '../../lib';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
