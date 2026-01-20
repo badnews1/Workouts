@@ -3,6 +3,7 @@
  */
 
 import { Users } from 'lucide-react';
+import { Card } from '@/components/ui/card';
 
 interface RecipeInfoCardProps {
   name: string;
@@ -16,7 +17,7 @@ export function RecipeInfoCard({
   mealType,
 }: RecipeInfoCardProps) {
   return (
-    <div className="bg-white border-4 border-black shadow-[8px_8px_0_0_#000] mx-4 -mt-8 relative z-10 p-6">
+    <Card backgroundColor="white" size="xl" className="mx-4 -mt-8 relative z-10 p-6">
       {/* Таб категории */}
       {mealType && (
         <div className="inline-block bg-[#ffda54] border-4 border-black px-4 py-1 font-black uppercase text-xs mb-6">
@@ -34,6 +35,6 @@ export function RecipeInfoCard({
         <Users className="w-5 h-5" strokeWidth={3} />
         <span className="font-black text-sm">{servings} порции</span>
       </div>
-    </div>
+    </Card>
   );
 }

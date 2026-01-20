@@ -5,6 +5,8 @@
  */
 
 import { Minus, Plus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 
 interface QuickPortionSelectorProps {
   amount: string;
@@ -40,7 +42,7 @@ export function QuickPortionSelector({ amount, unit, onAmountChange }: QuickPort
   };
 
   return (
-    <div className="bg-[#1a1a1a] p-4 border-4 border-black shadow-[8px_8px_0_0_#000]">
+    <Card backgroundColor="#1a1a1a" size="xl" className="p-4">
       {/* Заголовок и быстрые кнопки */}
       <div className="flex items-center justify-between mb-4">
         <h2 className="font-black text-white uppercase text-sm">Размер порции</h2>
@@ -62,14 +64,17 @@ export function QuickPortionSelector({ amount, unit, onAmountChange }: QuickPort
       </div>
 
       {/* Инпут с кнопками +/- */}
-      <div className="bg-white border-4 border-black p-4 flex items-center gap-3">
+      <Card backgroundColor="white" className="p-4 flex items-center gap-3">
         {/* Кнопка минус */}
-        <button
+        <Button
           onClick={handleDecrement}
-          className="w-12 h-12 bg-white border-4 border-black shadow-[4px_4px_0_0_#000] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all flex items-center justify-center"
+          variant="outline"
+          size="icon"
+          shadow={false}
+          className="shadow-[4px_4px_0_0_#000] active:shadow-none"
         >
           <Minus className="w-6 h-6" strokeWidth={4} />
-        </button>
+        </Button>
 
         {/* Поле ввода */}
         <div className="flex-1 flex items-center justify-center">
@@ -85,13 +90,16 @@ export function QuickPortionSelector({ amount, unit, onAmountChange }: QuickPort
         </div>
 
         {/* Кнопка плюс */}
-        <button
+        <Button
           onClick={handleIncrement}
-          className="w-12 h-12 bg-white border-4 border-black shadow-[4px_4px_0_0_#000] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all flex items-center justify-center"
+          variant="outline"
+          size="icon"
+          shadow={false}
+          className="shadow-[4px_4px_0_0_#000] active:shadow-none"
         >
           <Plus className="w-6 h-6" strokeWidth={4} />
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Card>
+    </Card>
   );
 }

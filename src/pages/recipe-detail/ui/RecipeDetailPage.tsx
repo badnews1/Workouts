@@ -11,6 +11,7 @@ import { useSearchParams, useNavigate } from 'react-router';
 import { Edit, Plus } from 'lucide-react';
 import { useRecipes } from '@/entities/recipe';
 import { toast } from 'sonner@2.0.3';
+import { Button } from '@/components/ui/button';
 import {
   RecipeHeader,
   RecipeInfoCard,
@@ -100,70 +101,76 @@ export function RecipeDetailPage() {
   };
 
   return (
-    <div className="h-full bg-[#f5f5f5] flex flex-col overflow-y-auto pb-28">
-      {/* Шапка с фото и кнопками */}
-      <RecipeHeader
-        recipeName={recipe.name}
-        photoUrl={undefined} // TODO: добавить поле photo в модель Recipe
-        isFavorite={recipe.isFavorite}
-        onBack={handleBack}
-        onToggleFavorite={handleToggleFavorite}
-        onShare={handleShare}
-      />
+    <div className="h-full bg-[#f5f5f5] flex flex-col">
+      <div className="flex-1 overflow-y-auto pb-28">
+        {/* Шапка с фото и кнопками */}
+        <RecipeHeader
+          recipeName={recipe.name}
+          photoUrl={undefined} // TODO: добавить поле photo в модель Recipe
+          isFavorite={recipe.isFavorite}
+          onBack={handleBack}
+          onToggleFavorite={handleToggleFavorite}
+          onShare={handleShare}
+        />
 
-      {/* Основная информация (наезжает на фото) */}
-      <RecipeInfoCard
-        name={recipe.name}
-        servings={recipe.servings}
-        mealType="ОБЕД"
-      />
+        {/* Основная информация (наезжает на фото) */}
+        <RecipeInfoCard
+          name={recipe.name}
+          servings={recipe.servings}
+          mealType="ОБЕД"
+        />
 
-      {/* КБЖУ */}
-      <div className="mt-6">
-        <RecipeNutrition
-          calories={adjustedNutrition.calories}
-          protein={adjustedNutrition.protein}
-          fat={adjustedNutrition.fat}
-          carbs={adjustedNutrition.carbs}
+        {/* КБЖУ */}
+        <div className="mt-6">
+          <RecipeNutrition
+            calories={adjustedNutrition.calories}
+            protein={adjustedNutrition.protein}
+            fat={adjustedNutrition.fat}
+            carbs={adjustedNutrition.carbs}
+          />
+        </div>
+
+        {/* Ингредиенты */}
+        <RecipeIngredientsSection
+          ingredients={recipe.ingredients}
+          servings={recipe.servings}
+          currentServings={currentServings}
+          checkedIngredients={checkedIngredients}
+          onServingsChange={setCurrentServings}
+          onToggleIngredient={handleToggleIngredient}
+        />
+
+        {/* Шаги приготовления */}
+        <RecipeStepsSection
+          steps={recipe.steps}
+          checkedSteps={checkedSteps}
+          onToggleStep={handleToggleStep}
         />
       </div>
 
-      {/* Ингредиенты */}
-      <RecipeIngredientsSection
-        ingredients={recipe.ingredients}
-        servings={recipe.servings}
-        currentServings={currentServings}
-        checkedIngredients={checkedIngredients}
-        onServingsChange={setCurrentServings}
-        onToggleIngredient={handleToggleIngredient}
-      />
-
-      {/* Шаги приготовления */}
-      <RecipeStepsSection
-        steps={recipe.steps}
-        checkedSteps={checkedSteps}
-        onToggleStep={handleToggleStep}
-      />
-
       {/* Кнопки действий */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white p-4 border-t-4 border-black flex gap-3">
+      <div className="bg-white p-4 border-t-4 border-black flex gap-3">
         {/* Изменить */}
-        <button
+        <Button
           onClick={handleEdit}
-          className="flex-1 py-4 bg-white border-4 border-black font-black uppercase text-sm shadow-[4px_4px_0_0_#000] active:shadow-[2px_2px_0_0_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center justify-center gap-2"
+          variant="outline"
+          size="lg"
+          className="flex-1 gap-2"
         >
           <Edit className="w-5 h-5" strokeWidth={3} />
           Изменить
-        </button>
+        </Button>
 
         {/* В дневник */}
-        <button
+        <Button
           onClick={handleAddToDiary}
-          className="flex-1 py-4 bg-[#10B981] text-white border-4 border-black font-black uppercase text-sm shadow-[4px_4px_0_0_#000] active:shadow-[2px_2px_0_0_#000] active:translate-x-0.5 active:translate-y-0.5 transition-all flex items-center justify-center gap-2"
+          variant="primary"
+          size="lg"
+          className="flex-1 gap-2"
         >
           <Plus className="w-5 h-5" strokeWidth={3} />
           В дневник
-        </button>
+        </Button>
       </div>
     </div>
   );

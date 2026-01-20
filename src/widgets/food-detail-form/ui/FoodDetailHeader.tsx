@@ -27,12 +27,14 @@ export function FoodDetailHeader({
       <div className="flex items-start justify-between gap-3">
         {/* Кнопка назад и название */}
         <div className="flex items-start gap-3 flex-1">
-          <button
+          <Button
             onClick={onBack}
-            className="bg-[#ffda54] text-black p-2 border-4 border-black shadow-[4px_4px_0_0_#000] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all flex-shrink-0 mt-1"
+            variant="secondary"
+            size="icon-sm"
+            className="flex-shrink-0 mt-1"
           >
             <ArrowLeft className="w-5 h-5" strokeWidth={3} />
-          </button>
+          </Button>
           
           <div className="flex-1">
             <h1 className="font-black text-xl uppercase leading-tight mb-1">{name}</h1>
@@ -43,9 +45,11 @@ export function FoodDetailHeader({
         </div>
 
         {/* Кнопка избранного */}
-        <button
+        <Button
           onClick={onToggleFavorite}
-          className="bg-white p-2 border-4 border-black shadow-[4px_4px_0_0_#000] active:shadow-none active:translate-x-1 active:translate-y-1 transition-all flex-shrink-0 mt-1"
+          variant="outline"
+          size="icon-sm"
+          className="flex-shrink-0 mt-1"
         >
           <Heart 
             className="w-6 h-6" 
@@ -53,7 +57,7 @@ export function FoodDetailHeader({
             fill={isFavorite ? '#1a1a1a' : 'none'}
             stroke="#1a1a1a"
           />
-        </button>
+        </Button>
       </div>
     </div>
   );

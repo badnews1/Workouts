@@ -5,7 +5,9 @@
  */
 
 import { useState } from 'react';
-import { ChevronDown, BarChart3, Pill, Gem } from 'lucide-react';
+import { ChevronDown, Activity, Droplet, Wheat } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+
 import { VITAMINS, MINERALS, ADDITIONAL_DATA } from '@/entities/food';
 import type { NutritionalValue } from '@/entities/food';
 
@@ -49,19 +51,19 @@ export function NutrientsAccordion({ nutrition, amount, unit }: NutrientsAccordi
     { 
       type: 'additional', 
       title: 'Дополнительно', 
-      icon: BarChart3, 
+      icon: Activity, 
       items: filledAdditionalData as any 
     },
     { 
       type: 'vitamins', 
       title: 'Витамины', 
-      icon: Pill, 
+      icon: Droplet, 
       items: filledVitamins as any 
     },
     { 
       type: 'minerals', 
       title: 'Минералы', 
-      icon: Gem, 
+      icon: Wheat, 
       items: filledMinerals as any 
     },
   ].filter(section => section.items.length > 0);
@@ -89,9 +91,9 @@ export function NutrientsAccordion({ nutrition, amount, unit }: NutrientsAccordi
           const isExpanded = expandedSection === section.type;
 
           return (
-            <div 
+            <Card 
               key={section.type}
-              className="bg-white border-4 border-black shadow-[4px_4px_0_0_#000]"
+              backgroundColor="white"
             >
               {/* Заголовок секции */}
               <button
@@ -136,7 +138,7 @@ export function NutrientsAccordion({ nutrition, amount, unit }: NutrientsAccordi
                   </div>
                 </div>
               )}
-            </div>
+            </Card>
           );
         })}
       </div>

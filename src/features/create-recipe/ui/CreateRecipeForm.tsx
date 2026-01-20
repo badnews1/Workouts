@@ -214,9 +214,11 @@ export function CreateRecipeForm({ onSuccess }: CreateRecipeFormProps) {
       <div className="fixed bottom-0 left-0 right-0 bg-white p-4 border-t-4 border-black">
         <Button
           onClick={handleSave}
-          className="w-full bg-[#10B981] hover:bg-[#0ea370] text-white border-4 border-black shadow-[8px_8px_0_0_#000] active:shadow-[4px_4px_0_0_#000] active:translate-x-1 active:translate-y-1 font-black uppercase text-base h-14 transition-all"
+          variant="primary"
+          size="lg"
+          className="w-full gap-2"
         >
-          <Check className="w-5 h-5 mr-2" strokeWidth={3} />
+          <Check className="w-5 h-5" strokeWidth={3} />
           Сохранить рецепт
         </Button>
       </div>

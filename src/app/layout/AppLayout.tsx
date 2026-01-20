@@ -22,7 +22,8 @@ export function AppLayout({ children }: AppLayoutProps) {
                         location.pathname.includes('/add-food') || 
                         location.pathname.includes('/create-food') ||
                         location.pathname.includes('/create-recipe') ||
-                        location.pathname.includes('/food-detail');
+                        location.pathname.includes('/food-detail') ||
+                        location.pathname.includes('/recipe-detail');
 
   return (
     <div className="h-screen flex flex-col bg-white">

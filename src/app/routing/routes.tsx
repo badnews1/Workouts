@@ -21,7 +21,6 @@ import { CreateRecipePage } from '@/pages/create-recipe';
 import { FoodDetailPage } from '@/pages/food-detail';
 import { RecipeDetailPage } from '@/pages/recipe-detail';
 import { RecipesPage } from '@/pages/recipes';
-import { ComponentTestPage } from '@/pages/component-test'; // 🧪 Временная страница тестов
 
 export function AppRoutes() {
   return (
@@ -44,7 +43,6 @@ export function AppRoutes() {
       <Route path="/create-recipe" element={<CreateRecipePage />} />
       <Route path="/food-detail" element={<FoodDetailPage />} />
       <Route path="/recipe-detail" element={<RecipeDetailPage />} />
-      <Route path="/component-test" element={<ComponentTestPage />} /> {/* 🧪 Временный роут */}
     </Routes>
   );
 }

@@ -7,6 +7,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { formatDateRelative } from '../lib';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
 
 interface DateSelectorProps {
   selectedDate: Date;
@@ -15,14 +16,12 @@ interface DateSelectorProps {
 
 export function DateSelector({ selectedDate, onChangeDate }: DateSelectorProps) {
   return (
-    <div
-      className="bg-white border-4 border-black mb-6 flex items-center justify-between p-4"
-      style={{ boxShadow: '4px 4px 0px var(--brand-black)' }}
-    >
+    <Card backgroundColor="white" className="mb-6 flex items-center justify-between p-4">
       <Button
         onClick={() => onChangeDate(-1)}
         variant="secondary"
         size="icon-sm"
+        shadow={false}
         style={{ boxShadow: '2px 2px 0px var(--brand-black)' }}
       >
         <ChevronLeft className="w-5 h-5" strokeWidth={3} />
@@ -41,10 +40,11 @@ export function DateSelector({ selectedDate, onChangeDate }: DateSelectorProps) 
         onClick={() => onChangeDate(1)}
         variant="secondary"
         size="icon-sm"
+        shadow={false}
         style={{ boxShadow: '2px 2px 0px var(--brand-black)' }}
       >
         <ChevronRight className="w-5 h-5" strokeWidth={3} />
       </Button>
-    </div>
+    </Card>
   );
 }
