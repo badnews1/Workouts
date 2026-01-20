@@ -37,6 +37,7 @@ export const period2Workout2: Workout = {
           name: 'Махи на плечи с резиной',
           type: 'reps',
           targetReps: 20,
+          requiresBandSelection: true,
         },
         {
           id: 'p2-w2-3-3',
@@ -62,6 +63,7 @@ export const period2Workout2: Workout = {
           name: 'Вертикальная тяга резины в одной динамике',
           type: 'reps',
           recordResult: true,
+          requiresBandSelection: true,
         },
         {
           id: 'p2-w2-3-5',
@@ -87,12 +89,14 @@ export const period2Workout2: Workout = {
           name: 'Вертикальная тяга резины',
           type: 'reps',
           recordResult: true,
+          requiresBandSelection: true,
         },
         {
           id: 'p2-w2-3-7',
           name: 'Горизонтальная тяга резины до жжения',
           type: 'reps',
           recordResult: true,
+          requiresBandSelection: true,
         },
         {
           id: 'p2-w2-3-8',
@@ -106,6 +110,7 @@ export const period2Workout2: Workout = {
           name: 'Горизонтальная тяга резины до жжения',
           type: 'reps',
           recordResult: true,
+          requiresBandSelection: true,
         },
         {
           id: 'p2-w2-3-10',
@@ -121,7 +126,6 @@ export const period2Workout2: Workout = {
       name: 'Кардио',
       type: 'time',
       duration: 12 * 60,
-      description: 'Бег, скакалка, велосипед или ходьба',
     },
   ],
 };

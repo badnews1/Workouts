@@ -1,12 +1,8 @@
-import { Calendar, Clock } from 'lucide-react';
-
-interface WorkoutHistoryEntry {
-  workoutId: string;
-  workoutName: string;
-  periodName: string;
-  completedDates: string[]; // ISO даты
-  totalTime?: number;
-}
+import { History, Clock } from 'lucide-react';
+import { formatDateRelative, formatTime } from '@/shared';
+import type { WorkoutHistoryEntry } from '@/entities/workout';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 interface IntroWorkoutHistoryProps {
   history: WorkoutHistoryEntry[];
@@ -17,62 +13,72 @@ export function IntroWorkoutHistory({ history }: IntroWorkoutHistoryProps) {
     return null;
   }
 
-  const formatDate = (isoDate: string) => {
-    const date = new Date(isoDate);
-    const day = date.getDate();
-    const month = date.toLocaleDateString('ru-RU', { month: 'long' });
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
-  };
-
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
-
   return (
     <div>
       {/* Заголовок */}
       <div className="px-4 mb-4 mt-8">
-        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-          ИСТОРИЯ ТРЕНИРОВОК
-        </h2>
+        <div className="flex items-center justify-between">
+          <Badge
+            size="md"
+            style={{
+              backgroundColor: 'var(--brand-black)',
+              color: 'var(--brand-yellow)',
+            }}
+          >
+            ИСТОРИЯ ТРЕНИРОВОК
+          </Badge>
+          <p className="text-xs font-black text-gray-500">
+            {history.length} завершено
+          </p>
+        </div>
       </div>
 
       {/* Список выполненных тренировок */}
-      <div className="px-4 space-y-3 pb-8">
+      <div className="px-4 space-y-4 pb-8">
         {history.map((entry) => (
-          <div
+          <Card
             key={entry.workoutId}
-            className="bg-gray-50 rounded-2xl p-4"
+            size="lg"
+            className="p-4"
           >
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                <Calendar className="w-5 h-5 text-green-600" />
+              <div 
+                className="w-10 h-10 flex items-center justify-center flex-shrink-0 border-[3px] border-black"
+                style={{
+                  backgroundColor: 'var(--brand-green)',
+                }}
+              >
+                <History className="w-5 h-5 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <h3 className="font-semibold text-gray-900 mb-2">
+                <h3 className="font-black uppercase mb-2 text-black">
                   {entry.periodName} - {entry.workoutName}
                 </h3>
                 <div className="space-y-1">
                   {entry.completedDates.map((date, index) => (
                     <div key={index} className="flex items-center gap-2">
-                      <p className="text-sm text-gray-600">
-                        {formatDate(date)}
+                      <p className="text-sm font-bold text-gray-800">
+                        {formatDateRelative(new Date(date))}
                       </p>
                       {entry.totalTime !== undefined && (
-                        <div className="flex items-center gap-1 text-xs text-gray-500">
+                        <Badge
+                          size="sm"
+                          style={{
+                            backgroundColor: 'var(--brand-yellow)',
+                            color: 'var(--brand-black)',
+                          }}
+                          className="gap-1"
+                        >
                           <Clock className="w-3.5 h-3.5" />
                           <span>{formatTime(entry.totalTime)}</span>
-                        </div>
+                        </Badge>
                       )}
                     </div>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
+          </Card>
         ))}
       </div>
     </div>

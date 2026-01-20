@@ -1,12 +1,4 @@
-export interface Program {
-  id: string;
-  name: string;
-  description: string;
-  icon: string;
-  duration: string;
-  equipment: string;
-  color: string;
-}
+import type { Program } from './types';
 
 export const programs: Program[] = [
   {
@@ -16,16 +8,16 @@ export const programs: Program[] = [
     icon: '💪',
     duration: '30-45 мин',
     equipment: 'Без снарядов',
-    color: '#6366f1',
+    color: '#93c5fd',
   },
   {
     id: 'calisthenics-equipment',
-    name: 'Калистеника + экипировка',
+    name: 'Доп. оборудование',
     description: 'Продвинутые тренировки с дополнительным оборудованием для максимального результата',
     icon: '🏋️',
     duration: '40-60 мин',
     equipment: 'Турник, кольца',
-    color: '#f59e0b',
+    color: '#ffda54',
   },
   {
     id: 'gym',

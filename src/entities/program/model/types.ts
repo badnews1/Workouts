@@ -5,4 +5,5 @@ export interface Program {
   icon: string;
   duration: string;
   equipment: string;
+  color: string;
 }

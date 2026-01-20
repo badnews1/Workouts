@@ -1,14 +1,8 @@
-import { WorkoutProgram } from '../../../entities/workout-program';
+import { Workout, type WorkoutHistoryEntry } from '@/entities/workout';
 import { IntroWorkoutCard } from './IntroWorkoutCard';
 import { IntroWorkoutHistory } from './IntroWorkoutHistory';
-
-export interface WorkoutHistoryEntry {
-  workoutId: string;
-  workoutName: string;
-  periodName: string;
-  completedDates: string[];
-  totalTime?: number;
-}
+import type { WorkoutProgram } from '../model';
+import { Badge } from '@/components/ui/badge';
 
 interface IntroWorkoutsListProps {
   program: WorkoutProgram;
@@ -39,13 +33,19 @@ export function IntroWorkoutsList({
     <div>
       {/* Заголовок */}
       <div className="px-4 mb-4">
-        <h2 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+        <Badge
+          size="md"
+          style={{
+            backgroundColor: 'var(--brand-black)',
+            color: 'var(--brand-yellow)',
+          }}
+        >
           ТРЕНИРОВКИ
-        </h2>
+        </Badge>
       </div>
 
       {/* Список тренировок */}
-      <div className="px-4 space-y-3 mb-6">
+      <div className="px-4 space-y-4 mb-6">
         {program.levels[currentLevel].workouts.map((workout, index) => {
           const isCompleted = isWorkoutCompleted(workout.id);
           // Блокируем тренировки, которые идут после первой незавершенной

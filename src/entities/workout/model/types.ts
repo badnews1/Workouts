@@ -1,5 +1,7 @@
 export type ExerciseType = 'reps' | 'time' | 'circuit' | 'total' | 'static' | 'combo';
 
+export type BandColor = 'yellow' | 'red' | 'black' | 'purple' | 'green';
+
 export interface Exercise {
   id: string;
   name: string;
@@ -24,6 +26,9 @@ export interface Exercise {
   
   // Нужно ли записывать результат
   recordResult?: boolean;
+  
+  // Требуется ли выбор резины
+  requiresBandSelection?: boolean;
   
   // Иконка упражнения
   icon?: string;
@@ -68,4 +73,15 @@ export interface LevelData {
   totalProgress?: number; // общий прогресс уровня 0-100
   totalCompletedWorkouts?: number; // общее количество завершенных тренировок
   totalWorkoutsCount?: number; // общее количество тренировок в уровне
+}
+
+/**
+ * Запись истории завершенных тренировок
+ */
+export interface WorkoutHistoryEntry {
+  workoutId: string;
+  workoutName: string;
+  periodName: string;
+  completedDates: string[];
+  totalTime?: number;
 }

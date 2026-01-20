@@ -8,13 +8,11 @@
  * Навигация: Назад → /workouts (WorkoutsPage)
  */
 
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ChevronLeft } from 'lucide-react';
-import { Header } from '../../../shared/ui/header';
-import { programs } from '../../../entities/program';
-import { ProgramCard } from '../../../features/select-program';
-import { useLocalStorage } from '../../../shared/lib/hooks';
+import { useNavigate } from 'react-router';
+import { Header, useLocalStorage } from '@/shared';
+import { programs } from '@/entities/program';
+import { ProgramCard } from '@/features/select-program';
+import { Badge } from '@/components/ui/badge';
 
 export function ProgramsPage() {
   const navigate = useNavigate();
@@ -24,18 +22,16 @@ export function ProgramsPage() {
     <div className="h-full bg-white">
       <Header 
         title="Программы"
-        leftAction={
-          <button
-            onClick={() => navigate('/workouts')}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors -ml-2"
-            aria-label="Назад"
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-700" />
-          </button>
-        }
+        onBack={() => navigate('/workouts')}
       />
-      <div className="px-4 py-6">
-        <div className="space-y-4">
+      <div className="px-4 py-6 pb-28">
+        <Badge 
+          size="md" 
+          className="mb-6 bg-black text-[var(--brand-yellow)] uppercase tracking-tight"
+        >
+          Выбери свой путь
+        </Badge>
+        <div className="space-y-6">
           {programs.map((program) => (
             <ProgramCard
               key={program.id}

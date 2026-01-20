@@ -27,7 +27,7 @@ export function CircularProgress({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="#e5e7eb"
+          stroke="var(--brand-gray)"
           strokeWidth={strokeWidth}
           fill="none"
         />

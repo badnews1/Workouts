@@ -1,34 +1,68 @@
+import { Calendar, Flame, TrendingUp } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+
 interface IntroStatusHeaderProps {
   isCompleted: boolean;
   progress: number;
   color: string;
+  completedWorkouts?: number;
+  totalWorkouts?: number;
+  periodName?: string;
 }
 
-export function IntroStatusHeader({ isCompleted, progress, color }: IntroStatusHeaderProps) {
+export function IntroStatusHeader({ isCompleted, progress, color, completedWorkouts, totalWorkouts, periodName }: IntroStatusHeaderProps) {
   return (
-    <div 
-      className="mx-4 mt-6 mb-6 rounded-3xl p-6 text-white relative overflow-hidden"
-      style={{ 
-        backgroundColor: isCompleted ? '#10b981' : color
-      }}
+    <Card
+      size="xl"
+      backgroundColor={isCompleted ? 'var(--brand-green)' : 'var(--brand-yellow)'}
+      className="mx-4 mt-6 mb-6 p-6"
     >
-      <div className="relative z-10">
-        <p className="text-white/80 text-sm mb-1">Статус</p>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold">
-            {isCompleted ? 'Завершено ✓' : 'В процессе'}
+      <div>
+        <div className="mb-4">
+          <h2 className="text-3xl font-black tracking-tight uppercase text-black">
+            Прогресс периода
           </h2>
-          <div className="text-5xl font-bold">{progress}%</div>
         </div>
 
         {/* Прогресс-бар */}
-        <div className="w-full h-2 bg-white/30 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-white rounded-full transition-all duration-500"
-            style={{ width: `${progress}%` }}
+        <div className="mb-4 relative">
+          <Progress 
+            value={progress} 
+            size="lg"
+            variant={isCompleted ? 'secondary' : 'primary'}
+            className="bg-gray-100"
           />
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span className="text-base font-black text-black">
+              {progress}%
+            </span>
+          </div>
+        </div>
+
+        {/* Иконки статистики */}
+        <div className="flex items-center gap-3">
+          <Badge
+            size="md"
+            className="flex-1 bg-black text-white justify-center gap-2 py-2"
+          >
+            <TrendingUp className="w-4 h-4" strokeWidth={2.5} />
+            <span>
+              {isCompleted ? 'Завершено ✓' : 'В процессе'}
+            </span>
+          </Badge>
+          {completedWorkouts !== undefined && totalWorkouts !== undefined && (
+            <Badge
+              size="md"
+              className="flex-1 bg-black text-white justify-center gap-2 py-2"
+            >
+              <Flame className="w-4 h-4" strokeWidth={2.5} />
+              <span>{completedWorkouts} из {totalWorkouts} трен.</span>
+            </Badge>
+          )}
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

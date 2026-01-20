@@ -11,7 +11,6 @@ export const period1Workout2: Workout = {
       type: 'total',
       totalTarget: 40,
       recordResult: true,
-      description: 'Зафиксировать за сколько сделал по времени',
     },
     {
       id: 'p1-w2-2',
@@ -19,7 +18,7 @@ export const period1Workout2: Workout = {
       type: 'total',
       totalTarget: 30,
       recordResult: true,
-      description: 'Зафиксировать за сколько сделал по времени',
+      requiresBandSelection: true,
     },
     {
       id: 'p1-w2-3',
@@ -27,7 +26,7 @@ export const period1Workout2: Workout = {
       type: 'total',
       totalTarget: 40,
       recordResult: true,
-      description: 'Зафиксировать за сколько сделал по времени',
+      requiresBandSelection: true,
     },
     {
       id: 'p1-w2-4',
@@ -35,7 +34,6 @@ export const period1Workout2: Workout = {
       type: 'total',
       totalTarget: 20,
       recordResult: true,
-      description: 'Зафиксировать за сколько сделал по времени',
     },
     {
       id: 'p1-w2-5',
@@ -43,7 +41,6 @@ export const period1Workout2: Workout = {
       type: 'total',
       totalTarget: 30,
       recordResult: true,
-      description: 'Зафиксировать за сколько сделал по времени',
     },
     {
       id: 'p1-w2-6',
@@ -51,7 +48,6 @@ export const period1Workout2: Workout = {
       type: 'total',
       totalTarget: 30,
       recordResult: true,
-      description: 'Зафиксировать за сколько сделал по времени',
     },
     {
       id: 'p1-w2-7',
@@ -59,14 +55,13 @@ export const period1Workout2: Workout = {
       type: 'total',
       totalTarget: 50,
       recordResult: true,
-      description: 'Каждые 30 секунд 5 повторов. Зафиксировать за сколько сделал',
+      description: 'Каждые 30 секунд 5 повторов',
     },
     {
       id: 'p1-w2-8',
       name: 'Кардио',
       type: 'time',
       duration: 1200, // 20 минут
-      description: 'Бег, скакалка, велосипед или ходьба',
     },
   ],
 };

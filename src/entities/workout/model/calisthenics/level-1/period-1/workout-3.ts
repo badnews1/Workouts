@@ -44,10 +44,10 @@ export const period1Workout3: Workout = {
         },
         {
           id: 'p1-w3-2-3',
-          name: 'Подтягивания в одной динамике',
+          name: 'Подтягивания',
           type: 'reps',
           recordResult: true,
-          description: 'Записать сколько сделал',
+          description: 'В одной динамике',
         },
       ],
       restAfter: 60,
@@ -60,17 +60,18 @@ export const period1Workout3: Workout = {
       exercises: [
         {
           id: 'p1-w3-3-1',
-          name: 'Подтягивания до жжения',
+          name: 'Подтягивания',
           type: 'reps',
           recordResult: true,
-          description: 'Записать сколько сделал',
+          description: 'До отказа',
         },
         {
           id: 'p1-w3-3-2',
-          name: 'Мертвая тяга со сведением лопаток с резиной',
+          name: 'Мертвая тяга со сведением лопаток',
           type: 'reps',
           recordResult: true,
-          description: 'Записать сколько сделал',
+          description: 'С резиной',
+          requiresBandSelection: true,
         },
       ],
       restAfter: 60,
@@ -116,10 +117,10 @@ export const period1Workout3: Workout = {
         },
         {
           id: 'p1-w3-5-3',
-          name: 'Подтягивани в одной динамике',
+          name: 'Подтягивания',
           type: 'reps',
           recordResult: true,
-          description: 'Записать сколько сделал',
+          description: 'В одной динамике',
         },
       ],
       restAfter: 60,
@@ -132,17 +133,18 @@ export const period1Workout3: Workout = {
       exercises: [
         {
           id: 'p1-w3-6-1',
-          name: 'Подтягивания до жжения',
+          name: 'Подтягивания',
           type: 'reps',
           recordResult: true,
-          description: 'Записать сколько сделал',
+          description: 'До отказа',
         },
         {
           id: 'p1-w3-6-2',
-          name: 'Мертвая тяга со сведением лопаток с резиной',
+          name: 'Мертвая тяга со сведением лопаток',
           type: 'reps',
           recordResult: true,
-          description: 'Записать сколько сделал',
+          description: 'С резиной',
+          requiresBandSelection: true,
         },
       ],
       restAfter: 60,
@@ -155,10 +157,11 @@ export const period1Workout3: Workout = {
       exercises: [
         {
           id: 'p1-w3-7-1',
-          name: 'Подъём резины на бицепс с жимом над головой',
+          name: 'Подъёмы на бицепс с жимом над головой',
           type: 'reps',
-          description: 'В одной динамике. Например бутылка 5-10 литров',
+          description: 'С резиной, в одной динамике',
           recordResult: true,
+          requiresBandSelection: true,
         },
       ],
       restAfter: 60,
@@ -168,7 +171,6 @@ export const period1Workout3: Workout = {
       name: 'Кардио',
       type: 'time',
       duration: 1200, // 20 минут
-      description: 'Бег, скакалка, велосипед или ходьба',
     },
   ],
 };

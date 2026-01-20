@@ -15,6 +15,7 @@ export const period2Workout1: Workout = {
           name: 'Горизонтальная тяга резины в одной динамике',
           type: 'reps',
           recordResult: true,
+          requiresBandSelection: true,
         },
         {
           id: 'p2-w1-1-2',
@@ -68,6 +69,7 @@ export const period2Workout1: Workout = {
           name: 'Вертикальная тяга резины в одной динамике',
           type: 'reps',
           recordResult: true,
+          requiresBandSelection: true,
         },
         {
           id: 'p2-w1-3-2',
@@ -87,6 +89,7 @@ export const period2Workout1: Workout = {
       targetReps: 30,
       description: 'Махи резины на плечи',
       restAfter: 45,
+      requiresBandSelection: true,
     },
     {
       id: 'p2-w1-5',

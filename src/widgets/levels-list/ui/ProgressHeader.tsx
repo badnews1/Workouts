@@ -1,6 +1,10 @@
+import { Award, Flame } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+
 interface ProgressHeaderProps {
   programName: string;
-  programIcon: string;
   programDescription?: string;
   currentLevel: number;
   totalLevels: number;
@@ -22,59 +26,60 @@ export function ProgressHeader({
     ? Math.round((completedWorkouts / totalWorkouts) * 100) 
     : 0;
 
-  const hexToRgba = (hex: string, alpha: number) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  };
+  const isCompleted = progressPercentage === 100;
 
   return (
-    <div 
-      className="rounded-3xl p-6 mb-6 text-white shadow-lg"
-      style={{ backgroundColor: color }}
+    <Card 
+      size="xl"
+      backgroundColor={isCompleted ? 'var(--brand-green)' : 'var(--brand-yellow)'}
+      className="p-5 mb-6"
     >
-      {/* Верхняя часть - название и процент */}
-      <div className="flex items-start justify-between mb-6">
-        <div className="flex-1">
-          <h1 className="text-3xl font-bold mb-2">{programName}</h1>
-          {programDescription && (
-            <p className="text-sm opacity-90">{programDescription}</p>
-          )}
-        </div>
-        <div className="text-5xl font-bold ml-4">
-          {progressPercentage}%
-        </div>
+      {/* Верхняя часть - название программы */}
+      <div className="mb-4">
+        <h1 className="text-3xl font-black uppercase tracking-tight text-black mb-1">
+          {programName}
+        </h1>
+        {programDescription && (
+          <p className="text-sm font-bold text-gray-700">{programDescription}</p>
+        )}
       </div>
 
       {/* Прогресс-бар */}
-      <div className="mb-4">
-        <div 
-          className="h-2 rounded-full overflow-hidden"
-          style={{ backgroundColor: hexToRgba('#ffffff', 0.3) }}
-        >
-          <div 
-            className="h-full bg-white rounded-full transition-all duration-500"
-            style={{ width: `${progressPercentage}%` }}
-          />
+      <div className="mb-4 relative">
+        <Progress 
+          value={progressPercentage} 
+          size="lg"
+          variant={isCompleted ? 'secondary' : 'primary'}
+          className="bg-gray-100"
+        />
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <span className="text-base font-black text-black">
+            {progressPercentage}%
+          </span>
         </div>
       </div>
 
-      {/* Нижняя часть - уровень и тренировки */}
-      <div className="flex items-center gap-4 text-sm">
-        <div className="flex items-center gap-2">
-          <span>📅</span>
-          <span className="font-medium">
+      {/* Нижняя часть - статистика */}
+      <div className="flex items-center gap-3">
+        <Badge 
+          size="md"
+          className="flex-1 bg-black text-white justify-center gap-2 py-2"
+        >
+          <Award className="w-4 h-4" strokeWidth={2.5} />
+          <span className="uppercase">
             Уровень {currentLevel} из {totalLevels}
           </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span>🔥</span>
-          <span className="font-medium">
+        </Badge>
+        <Badge 
+          size="md"
+          className="flex-1 bg-black text-white justify-center gap-2 py-2"
+        >
+          <Flame className="w-4 h-4" strokeWidth={2.5} />
+          <span className="uppercase">
             Тренировок: {completedWorkouts}
           </span>
-        </div>
+        </Badge>
       </div>
-    </div>
+    </Card>
   );
 }

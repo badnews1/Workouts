@@ -1,27 +1,6 @@
 import { calisthenicsLevel1 } from './calisthenics/level-1';
+import { loadWorkoutState } from '@/entities/workout-session';
 import type { LevelData, Period } from './types';
-
-// Тип для сохраненного состояния тренировки
-interface SavedWorkoutState {
-  workoutId: string;
-  isCompleted: boolean;
-  totalTime: number;
-  completedExercises: number[];
-  results: Record<string, number>;
-  completionDate: string | null;
-}
-
-// Загрузить состояние тренировки из localStorage
-function loadWorkoutState(workoutId: string): SavedWorkoutState | null {
-  const key = `workout_${workoutId}`;
-  const saved = localStorage.getItem(key);
-  if (!saved) return null;
-  try {
-    return JSON.parse(saved);
-  } catch {
-    return null;
-  }
-}
 
 // Рассчитать прогресс периода на основе завершенных тренировок
 function calculatePeriodProgress(period: Period): Period {

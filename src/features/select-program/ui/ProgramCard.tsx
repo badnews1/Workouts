@@ -1,5 +1,7 @@
 import { Clock, Check } from 'lucide-react';
-import { Program } from '../../../entities/program';
+import { Program } from '@/entities/program';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 
 interface ProgramCardProps {
   program: Program;
@@ -8,65 +10,66 @@ interface ProgramCardProps {
 }
 
 export function ProgramCard({ program, isSelected, onSelect }: ProgramCardProps) {
-  // Конвертируем hex в rgba для светлого фона
-  const hexToRgba = (hex: string, alpha: number) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  };
-
-  const lightBg = hexToRgba(program.color, 0.1);
-
   return (
-    <button
+    <Card
+      as="button"
       onClick={onSelect}
-      className="w-full text-left p-6 rounded-3xl bg-white border-2 hover:border-gray-300"
-      style={{ 
-        borderColor: isSelected ? program.color : '#e5e7eb',
-        transform: isSelected ? 'scale(1.02)' : 'scale(1)',
-        transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
+      state={isSelected ? 'current' : 'default'}
+      size="lg"
+      className="w-full text-left cursor-pointer"
+      style={{
+        boxShadow: isSelected ? '8px 8px 0 var(--brand-black)' : '6px 6px 0 var(--brand-black)',
+        transform: isSelected ? 'translate(-2px, -2px)' : 'none',
+        transition: 'all 0.15s ease-out',
       }}
     >
-      <div className="flex items-start justify-between mb-4">
-        <div 
-          className="w-14 h-14 rounded-2xl flex items-center justify-center"
-          style={{ backgroundColor: lightBg }}
-        >
-          <span className="text-3xl">{program.icon}</span>
-        </div>
-        <div
-          style={{
-            opacity: isSelected ? 1 : 0,
-            transform: isSelected ? 'scale(1)' : 'scale(0.8)',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-          }}
-        >
+      <div className="p-6">
+        <div className="flex items-start justify-between mb-4">
+          <div 
+            className="w-16 h-16 flex items-center justify-center border-4 border-black"
+            style={{ 
+              backgroundColor: isSelected ? 'var(--brand-white)' : program.color,
+            }}
+          >
+            <span className="text-4xl">{program.icon}</span>
+          </div>
           {isSelected && (
-            <span 
-              className="flex items-center gap-1.5 px-3 py-1.5 text-white text-sm font-medium rounded-xl"
-              style={{ backgroundColor: program.color }}
+            <Badge 
+              size="md"
+              className="bg-black text-white gap-1.5"
             >
-              <Check className="w-4 h-4" />
-              Выбрано
-            </span>
+              <Check className="w-4 h-4" strokeWidth={3} />
+              <span className="uppercase">Выбрано</span>
+            </Badge>
           )}
         </div>
-      </div>
-      
-      <h3 className="text-xl font-semibold text-gray-900 mb-2">{program.name}</h3>
-      <p className="text-sm text-gray-500 mb-4 leading-relaxed">{program.description}</p>
-      
-      <div className="flex items-center gap-4 text-sm text-gray-500">
-        <div className="flex items-center gap-1.5">
-          <Clock className="w-4 h-4" />
-          <span>{program.duration}</span>
+        
+        <h3 className="text-2xl font-black mb-2 uppercase tracking-tight text-black">
+          {program.name}
+        </h3>
+        <p className="text-sm font-bold mb-4 leading-relaxed text-gray-600">
+          {program.description}
+        </p>
+        
+        <div className="flex items-center gap-3">
+          <Badge 
+            variant="default"
+            size="md"
+            className="gap-1.5"
+          >
+            <Clock className="w-4 h-4" strokeWidth={2.5} />
+            <span>{program.duration}</span>
+          </Badge>
+          <Badge 
+            variant="default"
+            size="md"
+            className="gap-1.5"
+          >
+            <Check className="w-4 h-4" strokeWidth={2.5} />
+            <span>{program.equipment}</span>
+          </Badge>
         </div>
-        <div className="flex items-center gap-1.5">
-          <Check className="w-4 h-4" />
-          <span>{program.equipment}</span>
-        </div>
       </div>
-    </button>
+    </Card>
   );
 }

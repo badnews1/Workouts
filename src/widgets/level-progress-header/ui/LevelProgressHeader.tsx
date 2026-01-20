@@ -1,4 +1,7 @@
-import { Calendar, Flame } from 'lucide-react';
+import { Calendar, Flame, TrendingUp } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 
 interface LevelProgressHeaderProps {
   currentPeriod: number;
@@ -21,50 +24,67 @@ export function LevelProgressHeader({
   color,
   isIntroPeriod = false,
 }: LevelProgressHeaderProps) {
+  const isCompleted = progress === 100;
+
   return (
-    <div 
-      className="mx-4 mt-6 mb-6 rounded-3xl p-6 text-white relative overflow-hidden"
-      style={{ 
-        background: `linear-gradient(135deg, ${color} 0%, ${color}dd 100%)` 
-      }}
+    <Card
+      size="xl"
+      backgroundColor={isCompleted ? 'var(--brand-green)' : 'var(--brand-yellow)'}
+      className="mx-4 mt-6 mb-6 p-6"
     >
-      <div className="relative z-10">
-        <div className="flex items-start justify-between mb-4">
-          <div>
-            <p className="text-white/90 text-sm mb-1">Прогресс уровня</p>
-            <h2 className="text-2xl font-bold">
-              {isIntroPeriod ? 'Подготовка' : `Период ${currentPeriod} из ${totalPeriods}`}
-            </h2>
-          </div>
-          <div className="text-5xl font-bold">{progress}%</div>
+      <div>
+        <div className="mb-4">
+          <h2 className="text-3xl font-black tracking-tight uppercase text-black">
+            Прогресс уровня
+          </h2>
         </div>
 
         {/* Прогресс-бар */}
-        <div className="w-full h-2 bg-white/20 rounded-full overflow-hidden mb-4">
-          <div 
-            className="h-full bg-white rounded-full transition-all duration-500"
-            style={{ width: `${progress}%` }}
+        <div className="mb-4 relative">
+          <Progress 
+            value={progress} 
+            size="lg"
+            variant={isCompleted ? 'secondary' : 'primary'}
+            className="bg-gray-100"
           />
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span className="text-base font-black text-black">
+              {progress}%
+            </span>
+          </div>
         </div>
 
         {/* Иконки статистики */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           {currentDay !== undefined && (
-            <div className="flex items-center gap-2 bg-white/20 rounded-xl px-3 py-2">
-              <div className="w-6 h-6 bg-white/30 rounded flex items-center justify-center">
-                <Calendar className="w-4 h-4 text-white" />
-              </div>
-              <span className="text-sm font-medium">День {currentDay}</span>
-            </div>
+            <Badge 
+              size="md"
+              className="flex-1 bg-black text-white justify-center gap-2 py-2"
+            >
+              <Calendar className="w-4 h-4" strokeWidth={2.5} />
+              <span className="uppercase">День {currentDay}</span>
+            </Badge>
           )}
+          <Badge 
+            size="md"
+            className="flex-1 bg-black text-white justify-center gap-2 py-2"
+          >
+            <TrendingUp className="w-4 h-4" strokeWidth={2.5} />
+            <span>
+              {isIntroPeriod ? 'Вводный период' : `Период ${currentPeriod}`}
+            </span>
+          </Badge>
           {completedWorkouts !== undefined && totalWorkouts !== undefined && (
-            <div className="flex items-center gap-2">
-              <Flame className="w-5 h-5 text-orange-300" />
-              <span className="text-sm font-medium">{completedWorkouts} из {totalWorkouts} тренировок</span>
-            </div>
+            <Badge 
+              size="md"
+              className="flex-1 bg-black text-white justify-center gap-2 py-2"
+            >
+              <Flame className="w-4 h-4" strokeWidth={2.5} />
+              <span>{completedWorkouts} из {totalWorkouts} трен.</span>
+            </Badge>
           )}
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

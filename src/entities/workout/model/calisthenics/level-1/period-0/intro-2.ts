@@ -41,7 +41,6 @@ export const intro2: Workout = {
       name: 'Кардио',
       type: 'time',
       duration: 1200, // 20 минут
-      description: 'Бег, скакалка, велосипед или ходьба',
     },
   ],
 };

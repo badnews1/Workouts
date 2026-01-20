@@ -1,6 +1,7 @@
-import { ChevronRight, Lock } from 'lucide-react';
-import { Level } from '../../../entities/level';
-import { CircularProgress } from '../../../shared/ui/circular-progress';
+import { ChevronRight, Lock, Check } from 'lucide-react';
+import { Level } from '@/entities/level';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 
 interface LevelCardProps {
   level: Level;
@@ -9,61 +10,47 @@ interface LevelCardProps {
 }
 
 export function LevelCard({ level, color, onClick }: LevelCardProps) {
-  const hexToRgba = (hex: string, alpha: number) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  };
-
-  const getBorderColor = () => {
-    if (level.isCurrent) return color;
-    if (level.isCompleted) return '#10b981'; // green
-    return '#e5e7eb'; // gray
-  };
-
-  const getBackgroundColor = () => {
-    if (level.isCurrent) return hexToRgba(color, 0.05);
-    if (level.isCompleted) return hexToRgba('#10b981', 0.05);
-    if (level.isLocked) return '#f9fafb';
-    return '#ffffff';
+  // Определяем state для Card
+  const getCardState = (): 'completed' | 'current' | 'locked' | 'default' => {
+    if (level.isCompleted) return 'completed';
+    if (level.isCurrent) return 'current';
+    if (level.isLocked) return 'locked';
+    return 'default';
   };
 
   const getNumberBgColor = () => {
-    if (level.isCompleted) return '#10b981';
-    if (level.isCurrent) return color;
-    if (level.isLocked) return '#e5e7eb';
-    return '#e5e7eb';
+    if (level.isCompleted) return 'var(--brand-black)';
+    if (level.isCurrent) return 'var(--brand-black)';
+    if (level.isLocked) return 'var(--brand-gray)';
+    return 'var(--brand-black)';
   };
 
   const getTextColor = () => {
     if (level.isLocked) return 'text-gray-400';
+    if (level.isCompleted || level.isCurrent) return 'text-black';
     return 'text-gray-900';
   };
 
   return (
-    <button
+    <Card
+      as="button"
       onClick={onClick}
       disabled={level.isLocked}
-      className={`w-full text-left rounded-2xl transition-all duration-300 ${
-        level.isLocked ? 'cursor-not-allowed' : 'hover:shadow-md'
-      }`}
-      style={{
-        border: `2px solid ${getBorderColor()}`,
-        backgroundColor: getBackgroundColor(),
-      }}
+      state={getCardState()}
+      size="lg"
+      className={`w-full text-left ${level.isLocked ? 'cursor-not-allowed' : ''}`}
     >
       <div className="flex items-center gap-4 p-4">
         {/* Левая иконка с номером */}
         <div 
-          className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+          className="w-12 h-12 flex items-center justify-center flex-shrink-0 border-[3px] border-black"
           style={{ 
             backgroundColor: getNumberBgColor(),
           }}
         >
           <span 
-            className={`text-xl font-bold ${
-              level.isCompleted || level.isCurrent ? 'text-white' : 'text-gray-500'
+            className={`text-lg font-black ${
+              (level.isCompleted || level.isCurrent) && !level.isLocked ? 'text-white' : 'text-gray-400'
             }`}
           >
             {level.id}
@@ -72,38 +59,46 @@ export function LevelCard({ level, color, onClick }: LevelCardProps) {
 
         {/* Информация о уровне */}
         <div className="flex-1 min-w-0">
-          <h3 className={`text-base font-semibold mb-1 ${getTextColor()}`}>
+          <h3 className={`text-base font-black mb-1 uppercase ${getTextColor()}`}>
             {level.name}
           </h3>
-          <p className={`text-sm ${level.isLocked ? 'text-gray-400' : 'text-gray-500'}`}>
+          <p className={`text-xs font-bold ${level.isLocked ? 'text-gray-400' : 'text-gray-600'}`}>
             {level.description}
           </p>
         </div>
 
-        {/* Правая часть - прогресс или статус */}
+        {/* Правая часть - статус */}
         <div className="flex items-center gap-3 flex-shrink-0">
-          {/* Круговая диаграмма или иконка */}
-          {level.isCurrent && level.progress !== undefined ? (
-            <CircularProgress 
-              progress={level.progress} 
-              color={color}
-              size={52}
-              strokeWidth={5}
-            />
-          ) : level.isCompleted ? (
-            <CircularProgress 
-              progress={100} 
-              color="#10b981"
-              size={52}
-              strokeWidth={5}
-            />
-          ) : level.isLocked ? (
-            <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
-              <Lock className="w-5 h-5 text-gray-400" />
+          {level.isCompleted ? (
+            <div 
+              className="w-10 h-10 flex items-center justify-center border-[3px] border-black"
+              style={{
+                backgroundColor: 'var(--brand-black)',
+              }}
+            >
+              <Check className="w-5 h-5 text-white" strokeWidth={3} />
             </div>
-          ) : null}
+          ) : level.isLocked ? (
+            <div 
+              className="w-10 h-10 flex items-center justify-center border-[3px] border-black"
+              style={{
+                backgroundColor: 'var(--brand-gray)',
+              }}
+            >
+              <Lock className="w-5 h-5 text-gray-400" strokeWidth={2.5} />
+            </div>
+          ) : level.isCurrent && level.progress !== undefined ? (
+            <Badge 
+              size="md"
+              className="bg-black text-white"
+            >
+              {level.progress}%
+            </Badge>
+          ) : (
+            <ChevronRight className="w-6 h-6 text-black" strokeWidth={3} />
+          )}
         </div>
       </div>
-    </button>
+    </Card>
   );
 }
